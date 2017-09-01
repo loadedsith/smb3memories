@@ -1,5 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import TodoTextInput from './TodoTextInput';
+import Card from './Card';
 
 class Header extends Component {
   constructor(props) {
@@ -18,6 +19,8 @@ class Header extends Component {
       <header className="header">
         <h1>memory</h1>
         <h4>by <a href="mailto:graham.p.heath@gmail.com">Graham P Heath</a></h4>
+        <Card/>
+
         <TodoTextInput
           newTodo
           onSave={this.handleSave}
