@@ -5,8 +5,7 @@
     "classnames": "^2.2.5",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
-    "es6-shim": "^0.35.3",
-    "todomvc-app-css": "^2.0.6"
+    "es6-shim": "^0.35.3"
   },
   "devDependencies": {
     "react-addons-test-utils": "^15.4.2",
