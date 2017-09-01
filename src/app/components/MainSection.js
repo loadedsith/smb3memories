@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import TodoItem from './TodoItem';
+import Card from './Card';
 import Footer from './Footer';
 import {SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE} from '../constants/TodoFilters';
 
@@ -63,18 +64,38 @@ class MainSection extends Component {
   }
 
   render() {
-    const {todos, actions} = this.props;
+    const {todos, actions, cards} = this.props;
     const {filter} = this.state;
 
+    // const grid = getGrid(5, 6);
+    // console.log('grid', grid);
     const filteredTodos = todos.filter(TODO_FILTERS[filter]);
     const completedCount = todos.reduce((count, todo) =>
       todo.completed ? count + 1 : count,
       0
     );
+    const cardsOut = JSON.stringify(cards[0].grid);
 
     return (
       <section className="main">
+        {cardsOut}
         {this.renderToggleAll(completedCount)}
+        {cards[0].grid.map(row => {
+          console.log('row', row);
+
+          return (
+            <div className="row" key={JSON.stringify(row)}>
+              {row.map(card => {
+                return (
+                  <Card
+                    id={card}
+                    key={JSON.stringify(card)}
+                    image="/emoji/bacon.png"
+                    />
+                );
+              })}
+            </div>);
+        })}
         <ul className="todo-list">
           {filteredTodos.map(todo =>
             <TodoItem
@@ -91,6 +112,7 @@ class MainSection extends Component {
 }
 
 MainSection.propTypes = {
+  cards: PropTypes.array.isRequired,
   todos: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 };

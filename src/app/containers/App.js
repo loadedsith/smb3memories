@@ -7,7 +7,7 @@ import * as TodoActions from '../actions/index';
 
 class App extends Component {
   render() {
-    const {todos, actions} = this.props;
+    const {todos, actions, cards} = this.props;
     return (
       <div>
         <Header
@@ -16,6 +16,7 @@ class App extends Component {
         <MainSection
           todos={todos}
           actions={actions}
+          cards={cards}
           />
       </div>
     );
@@ -24,11 +25,13 @@ class App extends Component {
 
 App.propTypes = {
   todos: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  cards: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {
   return {
+    cards: state.cards,
     todos: state.todos
   };
 }

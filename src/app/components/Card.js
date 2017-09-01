@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 
 class Card extends Component {
   constructor(props, context) {
@@ -34,15 +34,20 @@ class Card extends Component {
   }
 
   render() {
+    const {image, id} = this.props;
+
     return (
-      <div className="Foob">
-      HELLO IM A CARD
+      <div className="card">
+        {id}
+        <img src={image}/>
       </div>
     );
   }
 }
 
 Card.propTypes = {
+  image: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired
 };
 
 export default Card;
