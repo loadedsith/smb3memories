@@ -1,0 +1,67 @@
+$white: #fff;
+$black: #000;
+$red: #ffa9a8;
+$blue: #91beec;
+
+$candy-colors: [$red, $white, $blue, $white];
+
+body {
+  background-color: #000;
+  padding: 20px 40px;
+  font-family: sans-serif;
+}
+
+h1 {
+  font-size: 72px;
+  font-weight: 600;
+  color: #FEE7E8;
+  margin: 0;
+}
+
+h4 {
+  font-weight: 600;
+  font-size: 24px;
+  color: #ECECEC;
+  margin: 8px 0 30px 0;
+
+  a {
+    text-decoration: none;
+    color: #ECECEC;
+
+    &:hover {
+      color: $black;
+      text-decoration: underline;
+    };
+  }
+}
+
+h1,
+h4 {
+  text-align: center;
+}
+
+$ribbon: '';
+@for $i from 1 through 50 {
+  $ribbon: '#{$ribbon} ' + nth($candy-colors, $i%4+1) + ' ' + $i*2 + '%';
+  @if $i != 50 {
+    $ribbon: '#{$ribbon}, '
+  };
+}
+
+.candy-wrapper {
+  background: $red; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #{$ribbon});
+  background: -webkit-linear-gradient(-45deg, #{$ribbon});
+  background: linear-gradient(135deg, #{$ribbon});
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$red', endColorstr=' $red',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  content: $ribbon;
+  padding: 10px 10px;
+  max-width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.memory-game {
+  background-color: #fff;
+  padding: 20px 40px;
+}

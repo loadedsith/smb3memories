@@ -5,6 +5,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FailPlugin = require('webpack-fail-plugin');
 const autoprefixer = require('autoprefixer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   module: {
@@ -53,7 +54,8 @@ module.exports = {
         postcss: () => [autoprefixer]
       },
       debug: true
-    })
+    }),
+    new ExtractTextPlugin('index-[contenthash].css')
   ],
   devtool: 'source-map',
   output: {
