@@ -1,11 +1,12 @@
 {
   "dependencies": {
+    "classnames": "^2.2.5",
+    "es6-shim": "^0.35.3",
+    "eslint-plugin-react": "^6.10.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "classnames": "^2.2.5",
     "react-redux": "^5.0.2",
-    "redux": "^3.6.0",
-    "es6-shim": "^0.35.3"
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "@types/classnames": "^0.0.32",
@@ -28,11 +29,12 @@
     "del": "^2.2.2",
     "es6-shim": "^0.35.3",
     "eslint": "^3.15.0",
+    "eslint-config-google": "^0.9.1",
     "eslint-config-xo-react": "^0.10.0",
     "eslint-config-xo-space": "^0.15.0",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-babel": "^4.0.1",
-    "eslint-plugin-react": "^6.10.0",
+    "eslint-plugin-react": "^6.10.3",
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "gulp": "gulpjs/gulp#4ed9a4a3275559c73a396eff7e1fde3824951ebb",
     "gulp-filter": "^5.0.0",

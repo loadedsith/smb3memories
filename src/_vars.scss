@@ -1,0 +1,20 @@
+$white: #fff;
+$black: #000;
+$red: #ffa9a8;
+$blue: #91beec;
+$purple: #281469;
+
+$bg: $purple;
+$fg: $white;
+
+$candy-colors: [$red, $white, $blue, $white];
+
+$mid-scale: 1.3;
+$tablet-scale: 1.5;
+$desktop-scale: 2;
+
+$mid: screen and (min-width: 600px);
+$tablet: screen and (min-width: 768px);
+$desktop: screen and (min-width: 1024px);
+
+$animation-timing: 0.3s;

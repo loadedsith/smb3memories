@@ -1,0 +1,91 @@
+.cards {
+  $height: 64px;
+  $width: 44px;
+  $h-padding: 10px;
+
+  .card {
+    $card-height: $height + $h-padding;
+    background-repeat: no-repeat;
+    flex: 1;
+    height: $card-height;
+    overflow: hidden;
+    position: relative;
+    image-rendering: pixelated;
+    background-position: 55% 55%;
+    background-size: $width $height;
+    transition: #{$animation-timing} background-size, #{$animation-timing} height;
+
+    @media #{$mid} {
+      height: $card-height * $mid-scale;
+      background-size: ($width * $mid-scale) ($height * $mid-scale);
+    }
+
+    @media #{$tablet} {
+      height: $card-height * $tablet-scale;
+      background-size: ($width * $tablet-scale) ($height * $tablet-scale);
+    }
+
+    @media #{$desktop} {
+      height: $card-height * $desktop-scale;
+      background-size: ($width * $desktop-scale) ($height * $desktop-scale);
+    }
+
+    .card-side {
+      background-position: center center;
+      background-repeat: no-repeat;
+      height: $height;
+      position: absolute;
+      width: $width;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: #{$animation-timing} height, #{$animation-timing} width;
+
+      p {
+        display: none;
+      }
+
+      @media #{$mid} {
+        height: $height * $mid-scale;
+        width: $width * $mid-scale;
+      }
+
+      @media #{$tablet} {
+        height: $height * $tablet-scale;
+        width: $width * $tablet-scale;
+      }
+
+      @media #{$desktop} {
+        height: $height * $desktop-scale;
+        width: $width * $desktop-scale;
+      }
+    }
+
+    .card-face {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+      width: 80%;
+      margin: auto auto;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .card-front {
+      background-size: contain;
+      background-color: $white;
+      backface-visibility: hidden;
+      image-rendering: pixelated;
+//      transform: rotateX(180deg);
+    }
+
+    .card-back {
+//      opacity: .3;
+      image-rendering: pixelated;
+      background-size: cover;
+      text-indent: -9999px;
+    }
+  }
+}

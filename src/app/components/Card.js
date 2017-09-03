@@ -34,20 +34,57 @@ class Card extends Component {
   }
 
   render() {
-    const {image, id} = this.props;
+    const {image, id, title, name, side, emoji} = this.props;
+    const cardBackStyle = {
+      backgroundImage: 'url("images/card-back.png")'
+    };
+    const cardFrontStyle = {
+      backgroundImage: 'url("images/card-front.png")'
+    };
+    const cardShadowStyle = {
+      backgroundImage: 'url("images/card-shadow.png")'
+    };
+    const cardFaceStyle = {
+      backgroundImage: `url("${image}")`
+    };
 
     return (
-      <div className="card">
-        {id}
-        <img src={image}/>
+      <div
+        className="card"
+        style={cardShadowStyle}
+        >
+        <div
+          className="card-side card-front"
+          style={cardFrontStyle}
+          id={id}
+          side={side}
+          >
+          <div
+            className="card-face"
+            style={cardFaceStyle}
+            >
+            <p className="name">{title || name}</p>
+            <p className="emoji">:{emoji}:</p>
+          </div>
+        </div>
+        <div
+          className="card-side card-back"
+          style={cardBackStyle}
+          >
+          ♠️
+        </div>
       </div>
     );
   }
 }
 
 Card.propTypes = {
+  emoji: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  side: PropTypes.string.isRequired,
+  title: PropTypes.string
 };
 
 export default Card;
