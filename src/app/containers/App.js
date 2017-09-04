@@ -3,18 +3,15 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Header from '../components/Header';
 import MainSection from '../components/MainSection';
-import * as TodoActions from '../actions/index';
+import * as Actions from '../actions/index';
 
 class App extends Component {
   render() {
-    const {todos, actions, cards} = this.props;
+    const {actions, cards} = this.props;
     return (
       <div>
-        <Header
-          addTodo={actions.addTodo}
-          />
+        <Header/>
         <MainSection
-          todos={todos}
           actions={actions}
           cards={cards}
           />
@@ -24,21 +21,19 @@ class App extends Component {
 }
 
 App.propTypes = {
-  todos: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
   cards: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    cards: state.cards,
-    todos: state.todos
+    cards: state.cards
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(TodoActions, dispatch)
+    actions: bindActionCreators(Actions, dispatch)
   };
 }
 
