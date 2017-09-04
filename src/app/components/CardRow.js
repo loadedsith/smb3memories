@@ -1,7 +1,16 @@
 import React, {PureComponent, PropTypes} from 'react';
 import Card from './Card';
 
+const cardNames = function (card, cards) {
+  return `${cards}${card.side}${card.image}`;
+};
+
 class CardRow extends PureComponent {
+  shouldComponentUpdate(nextProps) {
+    console.log(nextProps.row.reduce(cardNames, '') !== this.props.row.reduce(cardNames, ''));
+    return nextProps.row.reduce(cardNames, '') !== this.props.row.reduce(cardNames, '');
+  }
+
   render() {
     const {row, rowIndex, actions} = this.props;
 

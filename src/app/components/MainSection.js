@@ -1,7 +1,11 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import CardRow from './CardRow';
 
-class MainSection extends Component {
+class MainSection extends PureComponent {
+
+  shouldComponentUpdate() {
+    return false;
+  }
 
   render() {
     const {cards, actions} = this.props;

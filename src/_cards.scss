@@ -15,8 +15,12 @@
     background-size: $width $height;
     transition: #{$animation-timing} transform, #{$animation-timing} background-size, #{$animation-timing} background-position, #{$animation-timing} height;
 
+    &.face-down {
+      animation: unflip 1s steps(7, end) both;
+    }
+
     &.face-up {
-      transform: rotateY(180deg);
+      animation: flip 1s steps(7, end) both;
       background-position: 50% 50%;
     }
 
@@ -85,10 +89,27 @@
     }
 
     .card-back {
-      opacity: .3;
       image-rendering: pixelated;
       background-size: cover;
       text-indent: -9999px;
     }
+  }
+}
+
+@keyframes flip {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(180deg);
+  }
+}
+
+@keyframes unflip {
+  from {
+    transform: rotateY(180deg);
+  }
+  to {
+    transform: rotateY(0deg);
   }
 }

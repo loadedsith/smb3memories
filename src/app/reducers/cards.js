@@ -59,7 +59,7 @@ export default function cards(state = initialState, action) {
 
   switch (action.type) {
     case CHOOSE_CARD:
-
+      console.log('CHOOSE_CARD');
       // if (currentGuesses.length < 1) {
       updateArrayWith[action.address[0]] = {};
       updateArrayWith[action.address[0]][action.address[1]] = {

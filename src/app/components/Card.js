@@ -1,4 +1,7 @@
 import React, {PureComponent, PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as Actions from '../actions/index';
 
 const cardBackStyle = {
   backgroundImage: 'url("images/card-back.png")'
@@ -20,21 +23,23 @@ class Card extends PureComponent {
   }
 
   handleClick() {
+    console.log('card');
     this.props.chooseCard(this.props.address);
   }
 
   shouldComponentUpdate(nextProps) {
-    return nextProps.shown !== this.props.shown;
+    return nextProps.cards[nextProps.address[0]][nextProps.address[1]] !== this.props.cards[this.props.address[0]][this.props.address[1]];
   }
 
   render() {
-    const {image, id, title, name, side, emoji, shown} = this.props;
-
+    const {image, id, title, name, side, emoji} = this.props;
+    const shown = this.props.cards[this.props.address[0]][this.props.address[1]].shown;
+    console.log('image', image, shown);
     const cardFaceStyle = {
       backgroundImage: `url("${image}")`
     };
 
-    const visibility = shown ? 'face-up' : '';
+    const visibility = shown ? 'face-up' : 'face-down';
 
     return (
       <div
@@ -69,14 +74,29 @@ class Card extends PureComponent {
 
 Card.propTypes = {
   address: PropTypes.array.isRequired,
+  cards: PropTypes.array.isRequired,
   emoji: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   side: PropTypes.string.isRequired,
   title: PropTypes.string,
-  chooseCard: PropTypes.func.isRequired,
-  shown: PropTypes.bool.isRequired
+  chooseCard: PropTypes.func.isRequired
 };
 
-export default Card;
+function mapStateToProps(state) {
+  return {
+    cards: state.cards
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Card);
