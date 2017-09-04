@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 
 const cardBackStyle = {
   backgroundImage: 'url("images/card-back.png")'
@@ -10,7 +10,7 @@ const cardShadowStyle = {
   backgroundImage: 'url("images/card-shadow.png")'
 };
 
-class Card extends Component {
+class Card extends PureComponent {
   constructor(props, context) {
     super(props, context);
     this.state = {
