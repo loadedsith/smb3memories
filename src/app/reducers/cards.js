@@ -1,5 +1,6 @@
-// import {ADD_TODO} from '../constants/ActionTypes';
+import {CHOOSE_CARD} from '../constants/ActionTypes';
 import faces from '../data/faces.json';
+import update from 'immutability-helper';
 
 console.log('faces', faces);
 
@@ -24,8 +25,8 @@ const getDeck = function (count) {
     const face = faces[faceIndex];
     faces.splice(faceIndex, 1);
 
-    const cardA = Object.assign({side: 'a', id}, face);
-    const cardB = Object.assign({side: 'b', id}, face);
+    const cardA = Object.assign({side: 'a', id, shown: false}, face);
+    const cardB = Object.assign({side: 'b', id, shown: false}, face);
 
     r.push(cardA, cardB);
 
@@ -46,14 +47,29 @@ const getGrid = function (height, width) {
 };
 
 const initialState = [
-  {
-    grid: getGrid(4, 6)
-  }
+  ...getGrid(4, 6)
 ];
 
 export default function cards(state = initialState, action) {
-  console.log('action', action, state);
+  const updateArrayWith = {};
+  // const currentGuesses = state.map(
+  //   row => row.filter(
+  //     card => card.shown === true))
+  //   .filter(g => g.length > 0);
+
   switch (action.type) {
+    case CHOOSE_CARD:
+
+      // if (currentGuesses.length < 1) {
+      updateArrayWith[action.address[0]] = {};
+      updateArrayWith[action.address[0]][action.address[1]] = {
+        $merge: {
+          shown: !state[action.address[0]][action.address[1]].shown
+        }
+      };
+      return update(state, updateArrayWith);
+      // }
+      // return state;
     default:
       return state;
   }

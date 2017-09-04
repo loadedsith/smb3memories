@@ -1,57 +1,46 @@
 import React, {Component, PropTypes} from 'react';
 
+const cardBackStyle = {
+  backgroundImage: 'url("images/card-back.png")'
+};
+const cardFrontStyle = {
+  backgroundImage: 'url("images/card-front.png")'
+};
+const cardShadowStyle = {
+  backgroundImage: 'url("images/card-shadow.png")'
+};
+
 class Card extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      editing: false
+      shown: false
     };
-    this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.handleDoubleClick = this.handleDoubleClick.bind(this);
-    this.handleSave = this.handleSave.bind(this);
-  }
-
-  handleChange() {
-    // this.props.completeTodo(this.props.todo.id);
   }
 
   handleClick() {
-    // this.props.deleteTodo(this.props.todo.id);
+    this.props.chooseCard(this.props.address);
   }
 
-  handleDoubleClick() {
-    this.setState({editing: true});
-  }
-
-  handleSave(text) {
-    if (text.length === 0) {
-      // this.props.deleteTodo(this.props.todo.id);
-    } else {
-      // this.props.editTodo(this.props.todo.id, text);
-    }
-    this.setState({editing: false});
+  shouldComponentUpdate(nextProps) {
+    return nextProps.shown !== this.props.shown;
   }
 
   render() {
-    const {image, id, title, name, side, emoji} = this.props;
-    const cardBackStyle = {
-      backgroundImage: 'url("images/card-back.png")'
-    };
-    const cardFrontStyle = {
-      backgroundImage: 'url("images/card-front.png")'
-    };
-    const cardShadowStyle = {
-      backgroundImage: 'url("images/card-shadow.png")'
-    };
+    const {image, id, title, name, side, emoji, shown} = this.props;
+
     const cardFaceStyle = {
       backgroundImage: `url("${image}")`
     };
 
+    const visibility = shown ? 'face-up' : '';
+
     return (
       <div
-        className="card"
+        className={['card', visibility].join(' ')}
         style={cardShadowStyle}
+        onClick={this.handleClick}
         >
         <div
           className="card-side card-front"
@@ -79,12 +68,15 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-  emoji: PropTypes.number.isRequired,
+  address: PropTypes.array.isRequired,
+  emoji: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   side: PropTypes.string.isRequired,
-  title: PropTypes.string
+  title: PropTypes.string,
+  chooseCard: PropTypes.func.isRequired,
+  shown: PropTypes.bool.isRequired
 };
 
 export default Card;

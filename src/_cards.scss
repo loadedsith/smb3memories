@@ -11,9 +11,14 @@
     overflow: hidden;
     position: relative;
     image-rendering: pixelated;
-    background-position: 55% 55%;
+    background-position: 75% 55%;
     background-size: $width $height;
-    transition: #{$animation-timing} background-size, #{$animation-timing} height;
+    transition: #{$animation-timing} transform, #{$animation-timing} background-size, #{$animation-timing} background-position, #{$animation-timing} height;
+
+    &.face-up {
+      transform: rotateY(180deg);
+      background-position: 50% 50%;
+    }
 
     @media #{$mid} {
       height: $card-height * $mid-scale;
@@ -70,19 +75,17 @@
       position: absolute;
       top: 0;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) rotateY(180deg);
     }
 
     .card-front {
       background-size: contain;
-      background-color: $white;
       backface-visibility: hidden;
       image-rendering: pixelated;
-//      transform: rotateX(180deg);
     }
 
     .card-back {
-//      opacity: .3;
+      opacity: .3;
       image-rendering: pixelated;
       background-size: cover;
       text-indent: -9999px;
