@@ -2,8 +2,6 @@ import {CHOOSE_CARD} from '../constants/ActionTypes';
 import faces from '../data/faces.json';
 import update from 'immutability-helper';
 
-console.log('faces', faces);
-
 const takeOne = function (items) {
   const itemIndex = Math.floor(Math.random() * items.length);
   const item = Object.assign({}, items[itemIndex]);
@@ -50,16 +48,18 @@ const initialState = getGrid(4, 6);
 
 export default function cards(state = initialState, action) {
   const updateArrayWith = {};
-
   const currentGuesses = state.map(
+    // For each row.
     row => row.filter(
+      // For each colum return the cards that are shown.
       card => card.shown === true))
-      .filter(g => g.length > 0);
+      // Reduce from rows and columns to just a flat array.
+      .reduce((a, b) => b.concat(a), []);
 
   switch (action.type) {
     case CHOOSE_CARD:
-      console.log('CHOOSE_CARD');
       if (currentGuesses.length < 2) {
+        // Build the mutation, which update() will apply to our state.
         updateArrayWith[action.address[0]] = {};
         updateArrayWith[action.address[0]][action.address[1]] = {
           $merge: {
