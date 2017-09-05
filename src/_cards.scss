@@ -1,20 +1,19 @@
 .cards {
+  $h-padding: 10px;
   $height: 64px;
   $width: 44px;
-  $h-padding: 10px;
-
 
   .card {
     $card-height: $height + $h-padding;
+    animation-delay: -.3s;
+    background-position: 75% 55%;
     background-repeat: no-repeat;
+    background-size: $width $height;
     flex: 1;
     height: $card-height;
+    image-rendering: pixelated;
     overflow: hidden;
     position: relative;
-    image-rendering: pixelated;
-    background-position: 75% 55%;
-    animation-delay: -.3s;
-    background-size: $width $height;
     transition: #{$animation-timing} transform, #{$animation-timing} background-size, #{$animation-timing} background-position, #{$animation-timing} height;
 
     &.face-down {
@@ -27,29 +26,29 @@
     }
 
     @media #{$mid} {
-      height: $card-height * $mid-scale;
       background-size: ($width * $mid-scale) ($height * $mid-scale);
+      height: $card-height * $mid-scale;
     }
 
     @media #{$tablet} {
-      height: $card-height * $tablet-scale;
       background-size: ($width * $tablet-scale) ($height * $tablet-scale);
+      height: $card-height * $tablet-scale;
     }
 
     @media #{$desktop} {
-      height: $card-height * $desktop-scale;
       background-size: ($width * $desktop-scale) ($height * $desktop-scale);
+      height: $card-height * $desktop-scale;
     }
 
     .card-side {
       background-position: center center;
       background-repeat: no-repeat;
       height: $height;
-      position: absolute;
-      width: $width;
       left: 50%;
+      position: absolute;
       transform: translateX(-50%);
       transition: #{$animation-timing} height, #{$animation-timing} width;
+      width: $width;
 
       p {
         display: none;
@@ -72,27 +71,27 @@
     }
 
     .card-face {
-      background-size: contain;
-      background-repeat: no-repeat;
       background-position: center center;
-      width: 80%;
-      margin: auto auto;
+      background-repeat: no-repeat;
+      background-size: contain;
       height: 100%;
+      left: 50%;
+      margin: auto auto;
       position: absolute;
       top: 0;
-      left: 50%;
       transform: translateX(-50%) rotateY(180deg);
+      width: 80%;
     }
 
     .card-front {
-      background-size: contain;
       backface-visibility: hidden;
+      background-size: contain;
       image-rendering: pixelated;
     }
 
     .card-back {
-      image-rendering: pixelated;
       background-size: cover;
+      image-rendering: pixelated;
       text-indent: -9999px;
     }
   }

@@ -18,7 +18,8 @@ class CardRow extends PureComponent {
         {row.map((column, columnIndex) => {
           return (
             <Card
-              address={[rowIndex, columnIndex]}
+              row={rowIndex}
+              column={columnIndex}
               key={[rowIndex, columnIndex].join(',')}
               />
           );

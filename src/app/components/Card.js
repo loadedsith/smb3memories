@@ -13,8 +13,8 @@ const cardShadowStyle = {
   backgroundImage: 'url("images/card-shadow.png")'
 };
 
-const getCardFromDeck = function (cards, address) {
-  return cards[address[0]][address[1]];
+const getCardFromDeck = function (cards, row, column) {
+  return cards[row][column];
 };
 
 class Card extends PureComponent {
@@ -27,17 +27,22 @@ class Card extends PureComponent {
   }
 
   handleClick() {
-    console.log('debugger');
-    this.props.actions.chooseCard(this.props.address);
+    console.log('handleClick');
+    this.props.actions.chooseCard(this.props.row, this.props.column);
+
+    setTimeout(() => {
+      this.props.actions.checkMatches();
+      console.log('this.props.actions.checkMatches');
+    }, 1000);
   }
 
   shouldComponentUpdate(nextProps) {
-    return getCardFromDeck(nextProps.cards, nextProps.address) !==
-      getCardFromDeck(this.props.cards, this.props.address);
+    return getCardFromDeck(nextProps.cards, nextProps.row, nextProps.column) !==
+      getCardFromDeck(this.props.cards, this.props.row, this.props.column);
   }
 
   render() {
-    const card = getCardFromDeck(this.props.cards, this.props.address);
+    const card = getCardFromDeck(this.props.cards, this.props.row, this.props.column);
     const {image, id, title, name, side, emoji, shown} = card;
     const cardFaceStyle = {
       backgroundImage: `url("images/faces/${image}")`
@@ -76,7 +81,8 @@ class Card extends PureComponent {
 }
 
 Card.propTypes = {
-  address: PropTypes.array.isRequired,
+  row: PropTypes.number.isRequired,
+  column: PropTypes.number.isRequired,
   cards: PropTypes.array.isRequired,
   actions: PropTypes.func.isRequired
 };
