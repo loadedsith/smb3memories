@@ -46,30 +46,29 @@ const getGrid = function (height, width) {
   return grid;
 };
 
-const initialState = [
-  ...getGrid(4, 6)
-];
+const initialState = getGrid(4, 6);
 
 export default function cards(state = initialState, action) {
   const updateArrayWith = {};
-  // const currentGuesses = state.map(
-  //   row => row.filter(
-  //     card => card.shown === true))
-  //   .filter(g => g.length > 0);
+
+  const currentGuesses = state.map(
+    row => row.filter(
+      card => card.shown === true))
+      .filter(g => g.length > 0);
 
   switch (action.type) {
     case CHOOSE_CARD:
       console.log('CHOOSE_CARD');
-      // if (currentGuesses.length < 1) {
-      updateArrayWith[action.address[0]] = {};
-      updateArrayWith[action.address[0]][action.address[1]] = {
-        $merge: {
-          shown: !state[action.address[0]][action.address[1]].shown
-        }
-      };
-      return update(state, updateArrayWith);
-      // }
-      // return state;
+      if (currentGuesses.length < 2) {
+        updateArrayWith[action.address[0]] = {};
+        updateArrayWith[action.address[0]][action.address[1]] = {
+          $merge: {
+            shown: !state[action.address[0]][action.address[1]].shown
+          }
+        };
+        return update(state, updateArrayWith);
+      }
+      return state;
     default:
       return state;
   }

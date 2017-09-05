@@ -7,29 +7,19 @@ const cardNames = function (card, cards) {
 
 class CardRow extends PureComponent {
   shouldComponentUpdate(nextProps) {
-    console.log(nextProps.row.reduce(cardNames, '') !== this.props.row.reduce(cardNames, ''));
     return nextProps.row.reduce(cardNames, '') !== this.props.row.reduce(cardNames, '');
   }
 
   render() {
-    const {row, rowIndex, actions} = this.props;
+    const {row, rowIndex} = this.props;
 
     return (
       <div className="row">
-        {row.map((card, columnIndex) => {
-          const {side, id, emoji, title, image, shown} = card;
+        {row.map((column, columnIndex) => {
           return (
             <Card
               address={[rowIndex, columnIndex]}
-              emoji={emoji}
-              id={id}
-              image={'images/faces/' + image}
-              key={id + side}
-              name={name}
-              shown={shown}
-              side={side}
-              title={title}
-              {...actions}
+              key={[rowIndex, columnIndex].join(',')}
               />
           );
         })}
@@ -40,8 +30,7 @@ class CardRow extends PureComponent {
 
 CardRow.propTypes = {
   row: PropTypes.array.isRequired,
-  rowIndex: PropTypes.number.isRequired,
-  actions: PropTypes.object.isRequired
+  rowIndex: PropTypes.number.isRequired
 };
 
 export default CardRow;

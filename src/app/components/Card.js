@@ -13,6 +13,10 @@ const cardShadowStyle = {
   backgroundImage: 'url("images/card-shadow.png")'
 };
 
+const getCardFromDeck = function (cards, address) {
+  return cards[address[0]][address[1]];
+};
+
 class Card extends PureComponent {
   constructor(props, context) {
     super(props, context);
@@ -23,24 +27,23 @@ class Card extends PureComponent {
   }
 
   handleClick() {
-    console.log('card');
-    this.props.chooseCard(this.props.address);
+    console.log('debugger');
+    this.props.actions.chooseCard(this.props.address);
   }
 
   shouldComponentUpdate(nextProps) {
-    return nextProps.cards[nextProps.address[0]][nextProps.address[1]] !== this.props.cards[this.props.address[0]][this.props.address[1]];
+    return getCardFromDeck(nextProps.cards, nextProps.address) !==
+      getCardFromDeck(this.props.cards, this.props.address);
   }
 
   render() {
-    const {image, id, title, name, side, emoji} = this.props;
-    const shown = this.props.cards[this.props.address[0]][this.props.address[1]].shown;
-    console.log('image', image, shown);
+    const card = getCardFromDeck(this.props.cards, this.props.address);
+    const {image, id, title, name, side, emoji, shown} = card;
     const cardFaceStyle = {
-      backgroundImage: `url("${image}")`
+      backgroundImage: `url("images/faces/${image}")`
     };
-
     const visibility = shown ? 'face-up' : 'face-down';
-
+    console.log('card', card);
     return (
       <div
         className={['card', visibility].join(' ')}
@@ -75,13 +78,7 @@ class Card extends PureComponent {
 Card.propTypes = {
   address: PropTypes.array.isRequired,
   cards: PropTypes.array.isRequired,
-  emoji: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  side: PropTypes.string.isRequired,
-  title: PropTypes.string,
-  chooseCard: PropTypes.func.isRequired
+  actions: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
