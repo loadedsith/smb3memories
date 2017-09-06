@@ -46,70 +46,82 @@ const getGrid = function (height, width) {
   return grid;
 };
 
+// Build the mutation, which update() will apply to our state.
+const cardUpdater = function (card, update, updateArrayWith = {}) {
+  if (!updateArrayWith[card.row]) {
+    updateArrayWith[card.row] = {};
+  }
+  if (updateArrayWith[card.row][card.column]) {
+    Object.assign(updateArrayWith[card.row][card.column], update);
+  } else {
+    updateArrayWith[card.row][card.column] = update;
+  }
+
+  return updateArrayWith;
+};
+
 const initialState = getGrid(4, 6);
 
 export default function cards(state = initialState, action) {
-  const updateArrayWith = {};
+  let updateWith = {};
   const currentGuesses = state.map(
     // For each row.
     row => row.filter(
       // For each colum return the cards that are shown.
-      card => card.shown && !card.matched))
+      card => !card.matched && card.shown))
       // Reduce from rows and columns to just a flat array.
       .reduce((a, b) => b.concat(a), []);
+
+  let unmatchedCount = state.map(
+    // For each row.
+    row => row.reduce(
+      // For each colum return the cards that are shown.
+      (sum, value) => sum + (value.matched ? 0 : 1), 0))
+      // Reduce from rows and columns to just a flat array.
+      .reduce((a, b) => a + b, 0);
 
   switch (action.type) {
     case CHOOSE_CARD:
       if (currentGuesses.length < 2) {
-        // Build the mutation, which update() will apply to our state.
-        updateArrayWith[action.row] = {};
-        updateArrayWith[action.row][action.column] = {
+        updateWith = cardUpdater(action, {
           $merge: {
             shown: true
           }
-        };
-
+        });
+        console.log('updateWith', updateWith);
         currentGuesses.push(state[action.row][action.column]);
       }
 
-      return update(state, updateArrayWith);
+      return update(state, updateWith);
     case CHECK_MATCHES:
       if (currentGuesses.length === 2) {
         console.log('currentGuesses.length == 2', currentGuesses.length === 2);
-
+        // Build the mutation, which update() will apply to our state.
         if (currentGuesses[0].id === currentGuesses[1].id) {
-          updateArrayWith[currentGuesses[0].row] = {};
-          updateArrayWith[currentGuesses[0].row][currentGuesses[0].column] = {
-            $merge: {
-              matched: true
-            }
-          };
-
-          updateArrayWith[currentGuesses[1].row] = {};
-          updateArrayWith[currentGuesses[1].row][currentGuesses[1].column] = {
-            $merge: {
-              matched: true
-            }
-          };
+          currentGuesses.forEach(card => {
+            updateWith = cardUpdater(card, {
+              $merge: {
+                matched: true
+              }
+            }, updateWith);
+          });
         } else {
           console.log('currentGuesses', currentGuesses, currentGuesses.length);
-          updateArrayWith[currentGuesses[0].row] = {};
-          updateArrayWith[currentGuesses[0].row][currentGuesses[0].column] = {
-            $merge: {
-              shown: false
-            }
-          };
-
-          updateArrayWith[currentGuesses[1].row] = {};
-          updateArrayWith[currentGuesses[1].row][currentGuesses[1].column] = {
-            $merge: {
-              shown: false
-            }
-          };
+          currentGuesses.forEach(card => {
+            updateWith = cardUpdater(card, {
+              $merge: {
+                shown: false
+              }
+            }, updateWith);
+          });
         }
       }
+      unmatchedCount -= 2;
 
-      return update(state, updateArrayWith);
+      if (unmatchedCount === 0) {
+        return getGrid(4, 6);
+      }
+      return update(state, updateWith);
     default:
       return state;
   }

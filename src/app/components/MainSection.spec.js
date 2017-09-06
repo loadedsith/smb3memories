@@ -2,7 +2,6 @@ import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import MainSection from './MainSection';
 import TodoItem from './TodoItem';
-import Footer from './Footer';
 import {SHOW_ALL, SHOW_COMPLETED} from '../constants/TodoFilters';
 
 function setup(propOverrides) {
@@ -77,33 +76,6 @@ describe('components', () => {
       });
     });
 
-    describe('footer', () => {
-      it('should render', () => {
-        const {output} = setup();
-        const [, , footer] = output.props.children;
-        expect(footer.type).toBe(Footer);
-        expect(footer.props.completedCount).toBe(1);
-        expect(footer.props.activeCount).toBe(1);
-        expect(footer.props.filter).toBe(SHOW_ALL);
-      });
-
-      it('onShow should set the filter', () => {
-        const {output, renderer} = setup();
-        const [, , footer] = output.props.children;
-        footer.props.onShow(SHOW_COMPLETED);
-        const updated = renderer.getRenderOutput();
-        const [, , updatedFooter] = updated.props.children;
-        expect(updatedFooter.props.filter).toBe(SHOW_COMPLETED);
-      });
-
-      it('onClearCompleted should call clearCompleted', () => {
-        const {output, props} = setup();
-        const [, , footer] = output.props.children;
-        footer.props.onClearCompleted();
-        expect(props.actions.clearCompleted).toHaveBeenCalled();
-      });
-    });
-
     describe('todo list', () => {
       it('should render', () => {
         const {output, props} = setup();
@@ -114,16 +86,6 @@ describe('components', () => {
           expect(item.type).toBe(TodoItem);
           expect(item.props.todo).toBe(props.todos[i]);
         });
-      });
-
-      it('should filter items', () => {
-        const {output, renderer, props} = setup();
-        const [, , footer] = output.props.children;
-        footer.props.onShow(SHOW_COMPLETED);
-        const updated = renderer.getRenderOutput();
-        const [, updatedList] = updated.props.children;
-        expect(updatedList.props.children.length).toBe(1);
-        expect(updatedList.props.children[0].props.todo).toBe(props.todos[1]);
       });
     });
   });

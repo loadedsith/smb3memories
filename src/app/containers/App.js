@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import Header from '../components/Header';
 import MainSection from '../components/MainSection';
 import * as Actions from '../actions/index';
 
@@ -10,7 +9,6 @@ class App extends Component {
     const {actions, cards} = this.props;
     return (
       <div>
-        <Header/>
         <MainSection
           actions={actions}
           cards={cards}

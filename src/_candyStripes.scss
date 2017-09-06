@@ -1,0 +1,11 @@
+
+$candy-colors: [$red, $white, $blue, $white];
+
+$candyStripes: '';
+@for $i from 1 through 100 {
+  $candyStripes: '#{$candyStripes} ' + nth($candy-colors, $i%4+1) + ' ' + $i + '%';
+  @if $i != 100 {
+    $candyStripes: '#{$candyStripes}, '
+  };
+}
+

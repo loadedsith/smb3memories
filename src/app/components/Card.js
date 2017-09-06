@@ -43,23 +43,34 @@ class Card extends PureComponent {
 
   render() {
     const card = getCardFromDeck(this.props.cards, this.props.row, this.props.column);
-    const {image, id, title, name, side, emoji, shown} = card;
+    const {image, title, name, emoji, shown, matched} = card;
     const cardFaceStyle = {
       backgroundImage: `url("images/faces/${image}")`
     };
-    const visibility = shown ? 'face-up' : 'face-down';
-    console.log('card', card);
+
+    let classes = ['card'];
+
+    if (matched) {
+      // Matched should imply face up.
+      classes.push('matched');
+    } else {
+      classes.push(shown ? 'face-up' : 'face-down');
+    }
+
+    if (new URLSearchParams(window.location.search).get('cheat')) {
+      classes.push('cheater');
+    }
+
+    classes = classes.join(' ');
     return (
       <div
-        className={['card', visibility].join(' ')}
+        className={classes}
         style={cardShadowStyle}
         onClick={this.handleClick}
         >
         <div
           className="card-side card-front"
           style={cardFrontStyle}
-          id={id}
-          side={side}
           >
           <div
             className="card-face"
@@ -84,7 +95,7 @@ Card.propTypes = {
   row: PropTypes.number.isRequired,
   column: PropTypes.number.isRequired,
   cards: PropTypes.array.isRequired,
-  actions: PropTypes.func.isRequired
+  actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

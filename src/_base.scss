@@ -1,14 +1,3 @@
-$white: #fff;
-$black: #000;
-$red: #ffa9a8;
-$blue: #91beec;
-$purple: #281469;
-
-$bg: $purple;
-$fg: $white;
-
-$candy-colors: [$red, $white, $blue, $white];
-
 body {
   background-color: $black;
   color: $fg;
@@ -58,40 +47,12 @@ h4 {
   text-align: center;
 }
 
-$ribbon: '';
-@for $i from 1 through 100 {
-  $ribbon: '#{$ribbon} ' + nth($candy-colors, $i%4+1) + ' ' + $i + '%';
-  @if $i != 100 {
-    $ribbon: '#{$ribbon}, '
-  };
-}
-
-.candy-wrapper {
-  background: $red; /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #{$ribbon});
-  background: -webkit-linear-gradient(-45deg, #{$ribbon});
-  background: linear-gradient(135deg, #{$ribbon});
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$red', endColorstr=' $red',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-  content: $ribbon;
-  padding: 60px 20px 20px 20px;
-  margin-right: auto;
-  margin-left: auto;
-
-  @media #{$mid} {
-    max-width: 80%;
-  }
-
-  @media screen and (min-width: 1440px) {
-    max-width: 1440px;
-  }
-}
-
 .memory-game {
   $padding-v: 20px;
   $padding-h: 20px;
 
-  box-shadow: inset 5px 5px 3px 5px rgba($black, .6);
   background-color: $bg;
+  box-shadow: inset 5px 5px 3px 5px rgba($black, .6);
   padding: $padding-v $padding-h;
   transition: #{$animation-timing} box-shadow, #{$animation-timing} padding;
 
@@ -104,6 +65,27 @@ $ribbon: '';
     padding: ($padding-v * $desktop-scale) ($padding-h * $desktop-scale);
   }
 }
+
+.candy-wrapper {
+  background: $red; /* Old browsers */
+  background: -webkit-linear-gradient(-45deg, #{$candyStripes});
+  background: -moz-linear-gradient(-45deg, #{$candyStripes});
+  background: linear-gradient(135deg, #{$candyStripes});
+  content: $candyStripes;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$red', endColorstr=' $red',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 60px 20px 20px 20px;
+
+  @media #{$mid} {
+    max-width: 80%;
+  }
+
+  @media screen and (min-width: 1440px) {
+    max-width: 1440px;
+  }
+}
+
 
 .row {
   display: inline-flex;

@@ -1,27 +1,38 @@
 .cards {
-  $h-padding: 10px;
+  $h-padding: 20px;
   $height: 64px;
   $width: 44px;
+  perspective: 3000px;
 
   .card {
-    $card-height: $height + $h-padding;
+    $card-height: $height;
     animation-delay: -.3s;
     background-position: 75% 55%;
     background-repeat: no-repeat;
     background-size: $width $height;
+    margin-bottom: $h-padding;
     flex: 1;
     height: $card-height;
     image-rendering: pixelated;
     overflow: hidden;
     position: relative;
-    transition: #{$animation-timing} transform, #{$animation-timing} background-size, #{$animation-timing} background-position, #{$animation-timing} height;
+    transition: .5s steps(7, end) transform, #{$animation-timing} background-size, .5s steps(7, end) background-position, #{$animation-timing} height;
+    transform: rotateY(0deg);
 
     &.face-down {
-      animation: unflip 1s steps(7, end) both;
+      transform: rotateY(0deg);
+      transition: .5s 1s steps(7, end) transform, #{$animation-timing} background-size, .5s 1s steps(7, end) background-position, #{$animation-timing} height;
     }
 
     &.face-up {
-      animation: flip 1s steps(7, end) both;
+      background-position: 25% 50%;
+      transform: rotateY(180deg);
+    }
+
+    &.matched {
+      z-index: 1000;
+      pointer-events: none;
+      animation: disapear 1s steps(7, end) both;
       background-position: 25% 50%;
     }
 
@@ -89,6 +100,17 @@
       image-rendering: pixelated;
     }
 
+    &.cheater {
+      .card-back {
+        opacity: .3;
+      }
+
+      .card-front {
+        transform: translateX(-50%) rotateY(0deg);
+        backface-visibility: visible;
+      }
+    }
+
     .card-back {
       background-size: cover;
       image-rendering: pixelated;
@@ -97,20 +119,13 @@
   }
 }
 
-@keyframes flip {
+@keyframes disapear {
   from {
-    transform: rotateY(0deg);
+    transform: rotateZ(0deg) rotateY(180deg) scale(1);
+    opacity: 1;
   }
   to {
-    transform: rotateY(180deg);
-  }
-}
-
-@keyframes unflip {
-  from {
-    transform: rotateY(180deg);
-  }
-  to {
-    transform: rotateY(0deg);
+    transform: rotateZ(270deg) rotateY(180deg) scale(10);
+    opacity: 0;
   }
 }
