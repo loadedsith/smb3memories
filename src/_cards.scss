@@ -137,11 +137,11 @@
 
 @keyframes disapear {
   from {
-    transform: rotateZ(0deg) rotateY(180deg) scale(1);
+    transform: rotateZ(0deg) rotateY(0deg) scale(1);
     opacity: 1;
   }
   to {
-    transform: rotateZ(270deg) rotateY(180deg) scale(10);
+    transform: rotateZ(270deg) rotateY(0deg) scale(10);
     opacity: 0;
   }
 }

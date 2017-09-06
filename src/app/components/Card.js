@@ -31,7 +31,7 @@ class Card extends PureComponent {
 
     setTimeout(() => {
       this.props.actions.checkMatches();
-    }, 1000);
+    }, 1500);
   }
 
   shouldComponentUpdate(nextProps) {
