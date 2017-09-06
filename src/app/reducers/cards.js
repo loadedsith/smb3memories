@@ -36,14 +36,12 @@ const getDeck = function (count) {
 
 const getGrid = function (height, width) {
   if (height * width % 2 !== 0) {
-    throw Error('Odd number of cells, matching wont work.');
+    throw Error('Odd number of cells: matches won\'t be in pairs, aborting..');
   }
 
   const deck = getDeck(height * width);
-
-  const grid = Array.from(Array(height)).map((row, rowIndex) => getRow(width, deck, rowIndex));
-
-  return grid;
+  return Array.from(Array(height)).map(
+    (row, rowIndex) => getRow(width, deck, rowIndex));
 };
 
 // Build the mutation, which update() will apply to our state.
@@ -88,14 +86,12 @@ export default function cards(state = initialState, action) {
             shown: true
           }
         });
-        console.log('updateWith', updateWith);
         currentGuesses.push(state[action.row][action.column]);
       }
 
       return update(state, updateWith);
     case CHECK_MATCHES:
       if (currentGuesses.length === 2) {
-        console.log('currentGuesses.length == 2', currentGuesses.length === 2);
         // Build the mutation, which update() will apply to our state.
         if (currentGuesses[0].id === currentGuesses[1].id) {
           currentGuesses.forEach(card => {
@@ -106,7 +102,6 @@ export default function cards(state = initialState, action) {
             }, updateWith);
           });
         } else {
-          console.log('currentGuesses', currentGuesses, currentGuesses.length);
           currentGuesses.forEach(card => {
             updateWith = cardUpdater(card, {
               $merge: {

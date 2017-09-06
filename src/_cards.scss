@@ -16,12 +16,12 @@
     image-rendering: pixelated;
     overflow: hidden;
     position: relative;
-    transition: .5s steps(7, end) transform, #{$animation-timing} background-size, .5s steps(7, end) background-position, #{$animation-timing} height;
+    transition: .5s #{$animation-steps} transform, #{$animation-timing} background-size, .5s #{$animation-steps} background-position, #{$animation-timing} height;
     transform: rotateY(0deg);
 
     &.face-down {
       transform: rotateY(0deg);
-      transition: .5s 1s steps(7, end) transform, #{$animation-timing} background-size, .5s 1s steps(7, end) background-position, #{$animation-timing} height;
+      transition: .5s 1s #{$animation-steps} transform, #{$animation-timing} background-size, .5s 1s #{$animation-steps} background-position, #{$animation-timing} height;
     }
 
     &.face-up {
@@ -32,7 +32,7 @@
     &.matched {
       z-index: 1000;
       pointer-events: none;
-      animation: disapear 1s steps(7, end) both;
+      animation: disapear 1s #{$animation-steps} both;
       background-position: 25% 50%;
     }
 
