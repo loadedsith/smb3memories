@@ -6,7 +6,6 @@
 
   .card {
     $card-height: $height;
-    animation-delay: -.3s;
     background-position: 75% 55%;
     background-repeat: no-repeat;
     background-size: $width $height;
@@ -16,17 +15,32 @@
     image-rendering: pixelated;
     overflow: hidden;
     position: relative;
-    transition: .5s #{$animation-steps} transform, #{$animation-timing} background-size, .5s #{$animation-steps} background-position, #{$animation-timing} height;
     transform: rotateY(0deg);
+    transition: .5s #{$animation-steps} background-position;
 
     &.face-down {
-      transform: rotateY(0deg);
-      transition: .5s 1s #{$animation-steps} transform, #{$animation-timing} background-size, .5s 1s #{$animation-steps} background-position, #{$animation-timing} height;
+      transition: .5s 1s #{$animation-steps} background-position;
+      .card-back {
+        transform: translateX(-50%) rotateY(0deg);
+        transition: .5s 1s #{$animation-steps} transform, #{$animation-timing} background-size, #{$animation-timing} height;
+      }
+
+      .card-front {
+        transform: translateX(-50%) rotateY(180deg);
+        transition: .5s 1s #{$animation-steps} transform, #{$animation-timing} background-size, #{$animation-timing} height;
+      }
     }
 
     &.face-up {
       background-position: 25% 50%;
-      transform: rotateY(180deg);
+
+      .card-back {
+        transform: translateX(-50%) rotateY(180deg);
+      }
+
+      .card-front {
+        transform: translateX(-50%) rotateY(0deg);
+      }
     }
 
     &.matched {
@@ -54,11 +68,13 @@
     .card-side {
       background-position: center center;
       background-repeat: no-repeat;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
       height: $height;
       left: 50%;
       position: absolute;
       transform: translateX(-50%);
-      transition: #{$animation-timing} height, #{$animation-timing} width;
+      transition: .5s #{$animation-steps} transform, #{$animation-timing} background-size, .5s #{$animation-steps} background-position, #{$animation-timing} height, #{$animation-timing} width;
       width: $width;
 
       p {
@@ -90,12 +106,11 @@
       margin: auto auto;
       position: absolute;
       top: 0;
-      transform: translateX(-50%) rotateY(180deg);
       width: 80%;
+      transform: translateX(-50%);
     }
 
     .card-front {
-      backface-visibility: hidden;
       background-size: contain;
       image-rendering: pixelated;
     }
@@ -106,7 +121,8 @@
       }
 
       .card-front {
-        transform: translateX(-50%) rotateY(0deg);
+        transform: rotateY(0deg) translateX(-50%);
+        -webkit-backface-visibility: visible;
         backface-visibility: visible;
       }
     }

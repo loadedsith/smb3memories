@@ -27,12 +27,10 @@ class Card extends PureComponent {
   }
 
   handleClick() {
-    console.log('handleClick');
     this.props.actions.chooseCard(this.props.row, this.props.column);
 
     setTimeout(() => {
       this.props.actions.checkMatches();
-      console.log('this.props.actions.checkMatches');
     }, 1000);
   }
 

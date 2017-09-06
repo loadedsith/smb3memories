@@ -71,6 +71,15 @@
     "test": "gulp test",
     "test:auto": "gulp test:auto"
   },
+  "browserslist": {
+    "production": [
+      "last 2 version",
+      "ie 9"
+    ],
+    "development": [
+      "last 2 version"
+    ]
+  },
   "eslintConfig": {
     "root": true,
     "env": {
