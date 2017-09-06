@@ -12,6 +12,15 @@ class MainSection extends PureComponent {
 
     return (
       <section className="main">
+        <header className="header">
+          <h1>memory</h1>
+          <h4>
+            by <a href="mailto:graham.p.heath@gmail.com" title="Send me an email">Graham P Heath</a>
+            <a href="https://github.com/loadedsith/smb3memories" title="View On GitHub">
+              <img src="images/github_white.png" alt="" height="40" width="40"/>
+            </a>
+          </h4>
+        </header>
         <div className="cards">
           {cards.map((row, rowIndex) => {
             return (

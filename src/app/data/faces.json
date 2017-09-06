@@ -50,6 +50,11 @@
     "image": "loading.png"
   },
   {
+    "emoji": "github",
+    "title": "GitHub",
+    "image": "github.png"
+  },
+  {
     "emoji": "pickle_rick",
     "title": "Pickle Rick",
     "image": "pickle_rick.png"
