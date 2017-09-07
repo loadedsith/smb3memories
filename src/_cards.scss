@@ -10,6 +10,7 @@
     background-repeat: no-repeat;
     background-size: $width $height;
     margin-bottom: $h-padding;
+    cursor: pointer;
     flex: 1;
     height: $card-height;
     image-rendering: pixelated;
@@ -44,10 +45,14 @@
     }
 
     &.matched {
-      z-index: 1000;
-      pointer-events: none;
-      animation: disapear 1s #{$animation-steps} both;
+      animation: disapear-small 1s #{$animation-steps} both;
       background-position: 25% 50%;
+      pointer-events: none;
+      z-index: 1000;
+
+      @media #{$desktop} {
+        animation: disapear 1s #{$animation-steps} both;
+      }
     }
 
     @media #{$mid} {
@@ -135,19 +140,24 @@
   }
 }
 
-@keyframes disapear {
-  0% {
+@keyframes disapear-small {
+  from {
     transform: rotateZ(0deg) rotateY(0deg) scale(1);
     opacity: 1;
   }
-  99% {
-    transform: rotateZ(270deg) rotateY(0deg) scale(10);
+  to {
+    transform: rotateZ(270deg) rotateY(0deg) scale(.2);
     opacity: 0;
-    display: block;
   }
-  100% {
+}
+
+@keyframes disapear {
+  from {
+    transform: rotateZ(0deg) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+  to {
     transform: rotateZ(270deg) rotateY(0deg) scale(10);
     opacity: 0;
-    display: none;
   }
 }
