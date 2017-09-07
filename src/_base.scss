@@ -1,7 +1,7 @@
 body {
   background-color: $black;
   color: $fg;
-  padding: 10px 10px 20px 10px;
+  padding: 0 0 0 0;
   font-family: Verdana, sans-serif;
 
   @media #{$desktop} {
@@ -11,7 +11,7 @@ body {
 
 .header {
   h1 {
-    font-size: 48px;
+    font-size: 36px;
     font-weight: 600;
     color: $pink;
     margin: 0;
@@ -57,7 +57,7 @@ body {
 }
 
 .memory-game {
-  $padding-v: 20px;
+  $padding-v: 15px;
   $padding-h: 20px;
 
   background-color: $bg;
@@ -84,10 +84,11 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$red', endColorstr=' $red',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   margin-left: auto;
   margin-right: auto;
-  padding: 60px 20px 20px 20px;
+  padding: 15px 10px 10px 10px;
 
   @media #{$mid} {
     max-width: 80%;
+    padding: 60px 20px 20px 20px;
   }
 
   @media screen and (min-width: 1440px) {

@@ -9,7 +9,7 @@
     background-position: 75% 55%;
     background-repeat: no-repeat;
     background-size: $width $height;
-    margin-bottom: $h-padding;
+    margin-bottom: $h-padding / 2;
     cursor: pointer;
     flex: 1;
     height: $card-height;
@@ -18,6 +18,22 @@
     position: relative;
     transform: rotateY(0deg);
     transition: .5s #{$animation-steps} background-position;
+
+    @media #{$mid} {
+      background-size: ($width * $mid-scale) ($height * $mid-scale);
+      height: $card-height * $mid-scale;
+    }
+
+    @media #{$tablet} {
+      background-size: ($width * $tablet-scale) ($height * $tablet-scale);
+      height: $card-height * $tablet-scale;
+      margin-bottom: $h-padding;
+    }
+
+    @media #{$desktop} {
+      background-size: ($width * $desktop-scale) ($height * $desktop-scale);
+      height: $card-height * $desktop-scale;
+    }
 
     &.face-down {
       transition: .5s 1s #{$animation-steps} background-position;
@@ -53,21 +69,6 @@
       @media #{$desktop} {
         animation: disapear 1s #{$animation-steps} both;
       }
-    }
-
-    @media #{$mid} {
-      background-size: ($width * $mid-scale) ($height * $mid-scale);
-      height: $card-height * $mid-scale;
-    }
-
-    @media #{$tablet} {
-      background-size: ($width * $tablet-scale) ($height * $tablet-scale);
-      height: $card-height * $tablet-scale;
-    }
-
-    @media #{$desktop} {
-      background-size: ($width * $desktop-scale) ($height * $desktop-scale);
-      height: $card-height * $desktop-scale;
     }
 
     .card-side {
