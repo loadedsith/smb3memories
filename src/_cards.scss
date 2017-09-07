@@ -65,10 +65,6 @@
       background-position: 25% 50%;
       pointer-events: none;
       z-index: 1000;
-
-      @media #{$desktop} {
-        animation: disapear 1s #{$animation-steps} both;
-      }
     }
 
     .card-side {
@@ -148,17 +144,6 @@
   }
   to {
     transform: rotateZ(270deg) rotateY(0deg) scale(.2);
-    opacity: 0;
-  }
-}
-
-@keyframes disapear {
-  from {
-    transform: rotateZ(0deg) rotateY(0deg) scale(1);
-    opacity: 1;
-  }
-  to {
-    transform: rotateZ(270deg) rotateY(0deg) scale(10);
     opacity: 0;
   }
 }

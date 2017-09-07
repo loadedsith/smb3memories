@@ -37,7 +37,7 @@ class Card extends PureComponent {
 
     this.timeout = setTimeout(() => {
       this.props.actions.checkMatches();
-    }, 1500);
+    }, 500);
 
     // create and dispatch the event
     const event = new CustomEvent('cardClick', {
