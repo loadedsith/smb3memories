@@ -31,11 +31,11 @@ class Card extends PureComponent {
 
     // This allows enough time for the card to have flipped before the matching
     // state is checked.
-    if (this.timeout) {
-      clearTimeout(this.timeout);
+    if (document.timeout) {
+      clearTimeout(document.timeout);
     }
 
-    this.timeout = setTimeout(() => {
+    document.timeout = setTimeout(() => {
       this.props.actions.checkMatches();
     }, 500);
 

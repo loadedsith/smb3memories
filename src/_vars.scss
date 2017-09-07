@@ -19,4 +19,6 @@ $tablet: screen and (min-width: 768px);
 $desktop: screen and (min-width: 1024px);
 
 $animation-timing: 0.3s;
-$animation-steps: steps(7, end);
+
+// The 8bit effect didn't read, it just seemed slow.
+$animation-steps: '';
