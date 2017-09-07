@@ -136,12 +136,18 @@
 }
 
 @keyframes disapear {
-  from {
+  0% {
     transform: rotateZ(0deg) rotateY(0deg) scale(1);
     opacity: 1;
   }
-  to {
+  99% {
     transform: rotateZ(270deg) rotateY(0deg) scale(10);
     opacity: 0;
+    display: block;
+  }
+  100% {
+    transform: rotateZ(270deg) rotateY(0deg) scale(10);
+    opacity: 0;
+    display: none;
   }
 }

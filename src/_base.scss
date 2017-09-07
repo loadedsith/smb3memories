@@ -2,12 +2,13 @@ body {
   background-color: $black;
   color: $fg;
   padding: 10px 10px 20px 10px;
-  font-family: sans-serif;
+  font-family: Verdana, sans-serif;
 
   @media #{$desktop} {
     padding: 10px 40px 20px 40px;
   }
 }
+
 .header {
   h1 {
     font-size: 48px;
@@ -35,9 +36,11 @@ body {
       text-decoration: none;
       color: $pink;
 
-      &:hover {
-        color: #8800ff;
-      };
+      @media #{$desktop} {
+        &:hover {
+          color: #8800ff;
+        };
+      }
     }
   }
 
@@ -52,6 +55,7 @@ body {
     margin-left: 10px;
   }
 }
+
 .memory-game {
   $padding-v: 20px;
   $padding-h: 20px;
