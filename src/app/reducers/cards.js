@@ -1,4 +1,4 @@
-import {CHOOSE_CARD, CHECK_MATCHES} from '../constants/ActionTypes';
+import {CHOOSE_CARD, CHECK_MATCHES, NEW_GAME} from '../constants/ActionTypes';
 import faces from '../data/faces.json';
 import update from 'immutability-helper';
 
@@ -49,6 +49,7 @@ const cardUpdater = function (card, update, updateArrayWith = {}) {
   if (!updateArrayWith[card.row]) {
     updateArrayWith[card.row] = {};
   }
+
   if (updateArrayWith[card.row][card.column]) {
     Object.assign(updateArrayWith[card.row][card.column], update);
   } else {
@@ -70,15 +71,10 @@ export default function cards(state = initialState, action) {
       // Reduce from rows and columns to just a flat array.
       .reduce((a, b) => b.concat(a), []);
 
-  let unmatchedCount = state.map(
-    // For each row.
-    row => row.reduce(
-      // For each colum return the cards that are shown.
-      (sum, value) => sum + (value.matched ? 0 : 1), 0))
-      // Reduce from rows and columns to just a flat array.
-      .reduce((a, b) => a + b, 0);
-
   switch (action.type) {
+    case NEW_GAME:
+
+      return getGrid(4, 6);
     case CHOOSE_CARD:
       if (currentGuesses.length < 2) {
         updateWith = cardUpdater(action, {
@@ -111,11 +107,7 @@ export default function cards(state = initialState, action) {
           });
         }
       }
-      unmatchedCount -= 2;
 
-      if (unmatchedCount === 0) {
-        return getGrid(4, 6);
-      }
       return update(state, updateWith);
     default:
       return state;

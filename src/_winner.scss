@@ -1,0 +1,49 @@
+.winner {
+  text-align: center;
+//  height: 600px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  h3 {
+    animation: 3s steps(2, end) winner infinite;
+    align-self: center;
+  }
+
+  button {
+    align-self: center;
+    background-color: $purple;
+    border: 5px solid $white;
+    font-size: 150%;
+    font-family: Courier, san-serif;
+    color: $white;
+
+    @media #{$desktop} {
+      &:hover {
+        background-color: lighten($purple, .5);
+      };
+    }
+  }
+}
+
+@keyframes winner {
+  0% {
+    transform: rotateZ(2deg) rotateY(4deg) scale(1.5);
+  }
+
+  25% {
+    transform: rotateZ(-2deg) rotateY(-4deg) scale(1.6);
+  }
+
+  50% {
+    transform: rotateZ(-4deg) rotateY(2deg) scale(1.5);
+  }
+
+  75% {
+    transform: rotateZ(4deg) rotateY(-2deg) scale(1.4);
+  }
+
+  100% {
+    transform: rotateZ(2deg) rotateY(4deg) scale(1.5);
+  }
+}

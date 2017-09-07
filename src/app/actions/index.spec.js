@@ -15,4 +15,10 @@ describe('card actions', () => {
       type: types.CHECK_MATCHES
     });
   });
+
+  it('newGame should create NEW_GAME action', () => {
+    expect(actions.newGame()).toEqual({
+      type: types.NEW_GAME
+    });
+  });
 });

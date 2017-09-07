@@ -29,14 +29,29 @@ class Card extends PureComponent {
   handleClick() {
     this.props.actions.chooseCard(this.props.row, this.props.column);
 
+    // This allows enough time for the card to have flipped before the matching
+    // state is checked.
     setTimeout(() => {
       this.props.actions.checkMatches();
     }, 1500);
+
+    // create and dispatch the event
+    const event = new CustomEvent('cardClick', {
+      detail: {
+        now: Number(new Date())
+      }
+    });
+
+    document.dispatchEvent(event);
   }
 
   shouldComponentUpdate(nextProps) {
-    return getCardFromDeck(nextProps.cards, nextProps.row, nextProps.column) !==
-      getCardFromDeck(this.props.cards, this.props.row, this.props.column);
+    const thisCard = getCardFromDeck(this.props.cards, this.props.row,
+      this.props.column);
+    const newCard = getCardFromDeck(nextProps.cards, nextProps.row,
+      nextProps.column);
+
+    return thisCard !== newCard;
   }
 
   render() {
@@ -46,10 +61,10 @@ class Card extends PureComponent {
       backgroundImage: `url("images/faces/${image}")`
     };
 
-    let classes = ['card'];
+    const classes = ['card'];
 
+    // Matched should imply face up.
     if (matched) {
-      // Matched should imply face up.
       classes.push('matched');
     } else {
       classes.push(shown ? 'face-up' : 'face-down');
@@ -59,10 +74,9 @@ class Card extends PureComponent {
       classes.push('cheater');
     }
 
-    classes = classes.join(' ');
     return (
       <div
-        className={classes}
+        className={classes.join(' ')}
         style={cardShadowStyle}
         onClick={this.handleClick}
         >

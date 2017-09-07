@@ -6,3 +6,6 @@ export function chooseCard(row, column) {
 export function checkMatches() {
   return {type: types.CHECK_MATCHES};
 }
+export function newGame() {
+  return {type: types.NEW_GAME};
+}
