@@ -2,6 +2,7 @@
   $h-padding: 20px;
   $height: 64px;
   $width: 44px;
+
   perspective: 3000px;
 
   .card {
@@ -9,15 +10,15 @@
     background-position: 75% 55%;
     background-repeat: no-repeat;
     background-size: $width $height;
-    margin-bottom: $h-padding / 2;
     cursor: pointer;
     flex: 1;
     height: $card-height;
     image-rendering: pixelated;
+    margin-bottom: $h-padding / 2;
     overflow: hidden;
     position: relative;
     transform: rotateY(0deg);
-    transition: .5s #{$animation-steps} background-position;
+    transition: .5s background-position;
 
     @media #{$mid} {
       background-size: ($width * $mid-scale) ($height * $mid-scale);
@@ -36,15 +37,16 @@
     }
 
     &.face-down {
-      transition: .5s 1s #{$animation-steps} background-position;
+      transition: .5s 1s background-position;
+
       .card-back {
         transform: translateX(-50%) rotateY(0deg);
-        transition: .5s 1s #{$animation-steps} transform, #{$animation-timing} background-size, #{$animation-timing} height;
+        transition: .5s 1s transform, #{$animation-timing} background-size, #{$animation-timing} height;
       }
 
       .card-front {
         transform: translateX(-50%) rotateY(180deg);
-        transition: .5s 1s #{$animation-steps} transform, #{$animation-timing} background-size, #{$animation-timing} height;
+        transition: .5s 1s transform, #{$animation-timing} background-size, #{$animation-timing} height;
       }
     }
 
@@ -61,22 +63,22 @@
     }
 
     &.matched {
-      animation: disapear-small 1s #{$animation-steps} both;
+      animation: disapear-small 1s both;
       background-position: 25% 50%;
       pointer-events: none;
       z-index: 1000;
     }
 
     .card-side {
-      background-position: center center;
-      background-repeat: no-repeat;
       -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
+      background-position: center center;
+      background-repeat: no-repeat;
       height: $height;
       left: 50%;
       position: absolute;
       transform: translateX(-50%);
-      transition: .5s #{$animation-steps} transform, #{$animation-timing} background-size, .5s #{$animation-steps} background-position, #{$animation-timing} height, #{$animation-timing} width;
+      transition: .5s transform, #{$animation-timing} background-size, .5s background-position, #{$animation-timing} height, #{$animation-timing} width;
       width: $width;
 
       p {
@@ -108,8 +110,8 @@
       margin: auto auto;
       position: absolute;
       top: 0;
-      width: 80%;
       transform: translateX(-50%);
+      width: 80%;
     }
 
     .card-front {
@@ -123,9 +125,9 @@
       }
 
       .card-front {
-        transform: rotateY(0deg) translateX(-50%);
         -webkit-backface-visibility: visible;
         backface-visibility: visible;
+        transform: rotateY(0deg) translateX(-50%);
       }
     }
 
@@ -142,6 +144,7 @@
     transform: rotateZ(0deg) rotateY(0deg) scale(1);
     opacity: 1;
   }
+
   to {
     transform: rotateZ(270deg) rotateY(0deg) scale(.2);
     opacity: 0;

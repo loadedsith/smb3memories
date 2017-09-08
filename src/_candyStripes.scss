@@ -4,10 +4,13 @@
 $candy-colors: [$red, $white, $blue, $white];
 
 $candyStripes: '';
-@for $i from 1 through 50 {
+$stripeCount: 50;
+@for $i from 1 through $stripeCount {
   // Build the stripes colors, darkening as you go.
-  $candyStripes: '#{$candyStripes} ' + darken(nth($candy-colors, $i%4+1), $i) + ' ' + $i*2 + '%';
-  @if $i != 50 {
+  $candyStripes: '#{$candyStripes} ' + darken(nth($candy-colors, $i%4+1), $i * .75) + ' ' + ($i * 2) + '%';
+
+  // If not last in gradient, add a comma.
+  @if $i != $stripeCount {
     $candyStripes: '#{$candyStripes}, '
   };
 }

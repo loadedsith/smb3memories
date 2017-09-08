@@ -1,22 +1,22 @@
 .winner {
-  text-align: center;
-//  height: 600px;
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
+  text-align: center;
 
   h3 {
-    animation: 3s steps(2, end) winner infinite;
     align-self: center;
+    animation: 3s winner infinite linear;
+    font-size: 48px;
   }
 
   button {
     align-self: center;
     background-color: $purple;
     border: 5px solid $white;
-    font-size: 150%;
-    font-family: Courier, san-serif;
     color: $white;
+    font-family: Courier, san-serif;
+    font-size: 200%;
 
     @media #{$desktop} {
       &:hover {
@@ -44,6 +44,6 @@
   }
 
   100% {
-    transform: rotateZ(2deg) rotateY(4deg) scale(1.5);
+    transform: rotateZ(1.9deg) rotateY(3.9deg) scale(1.49);
   }
 }

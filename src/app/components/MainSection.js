@@ -53,7 +53,7 @@ class MainSection extends PureComponent {
             Winner!
           </h3>
           <h4>
-            {(time / 1000).toFixed(2)} seconds!
+            {(time / 1000).toFixed(2)} seconds
           </h4>
           <button onClick={this.handleClick}>👉 New Game</button>
         </div>
