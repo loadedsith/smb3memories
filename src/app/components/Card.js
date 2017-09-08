@@ -13,10 +13,6 @@ const cardShadowStyle = {
   backgroundImage: 'url("images/card-shadow.png")'
 };
 
-const getCardFromDeck = function (cards, row, column) {
-  return cards[row][column];
-};
-
 class Card extends PureComponent {
   constructor(props, context) {
     super(props, context);
@@ -50,17 +46,14 @@ class Card extends PureComponent {
   }
 
   shouldComponentUpdate(nextProps) {
-    const thisCard = getCardFromDeck(this.props.cards, this.props.row,
-      this.props.column);
-    const newCard = getCardFromDeck(nextProps.cards, nextProps.row,
-      nextProps.column);
+    const thisCard = this.props.card;
+    const newCard = nextProps.card;
 
     return thisCard !== newCard;
   }
 
   render() {
-    const card = getCardFromDeck(this.props.cards, this.props.row, this.props.column);
-    const {image, title, name, emoji, shown, matched} = card;
+    const {image, title, name, emoji, shown, matched} = this.props.card;
     const cardFaceStyle = {
       backgroundImage: `url("images/faces/${image}")`
     };
@@ -110,13 +103,13 @@ class Card extends PureComponent {
 Card.propTypes = {
   row: PropTypes.number.isRequired,
   column: PropTypes.number.isRequired,
-  cards: PropTypes.array.isRequired,
+  card: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
-    cards: state.cards
+    card: state.cards[ownProps.row][ownProps.column]
   };
 }
 

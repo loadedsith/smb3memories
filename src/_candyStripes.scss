@@ -1,10 +1,13 @@
-
+// We've got a SMB3 Refrence that has some lovely banding. They would have done
+// this with a very small tile, lets see if we can't do better. Careful though,
+// this generates 12k...
 $candy-colors: [$red, $white, $blue, $white];
 
 $candyStripes: '';
-@for $i from 1 through 100 {
-  $candyStripes: '#{$candyStripes} ' + nth($candy-colors, $i%4+1) + ' ' + $i + '%';
-  @if $i != 100 {
+@for $i from 1 through 50 {
+  // Build the stripes colors, darkening as you go.
+  $candyStripes: '#{$candyStripes} ' + darken(nth($candy-colors, $i%4+1), $i) + ' ' + $i*2 + '%';
+  @if $i != 50 {
     $candyStripes: '#{$candyStripes}, '
   };
 }

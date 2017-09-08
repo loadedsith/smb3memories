@@ -80,7 +80,6 @@ body {
   background: -webkit-linear-gradient(-45deg, #{$candyStripes});
   background: -moz-linear-gradient(-45deg, #{$candyStripes});
   background: linear-gradient(135deg, #{$candyStripes});
-  content: $candyStripes;
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$red', endColorstr=' $red',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   margin-left: auto;
   margin-right: auto;

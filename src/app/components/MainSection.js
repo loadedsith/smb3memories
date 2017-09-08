@@ -63,7 +63,10 @@ class MainSection extends PureComponent {
     return (
       <section className="main">
         <header className="header">
-          <h1>memory</h1>
+          <h1>
+            SMB3 Memories
+          </h1>
+
           <h4>
             by <a href="mailto:graham.p.heath@gmail.com" title="Send me an email">Graham P Heath</a>
             <a href="https://github.com/loadedsith/smb3memories" title="View On GitHub">
@@ -72,8 +75,8 @@ class MainSection extends PureComponent {
           </h4>
         </header>
         <div className="cards">
-          {gameDisplay}
-          {cards.map((row, rowIndex) => {
+          {gameDisplay ||
+          cards.map((row, rowIndex) => {
             return (
               <CardRow
                 key={JSON.stringify(row)}
