@@ -62,18 +62,6 @@ class MainSection extends PureComponent {
 
     return (
       <section className="main">
-        <header className="header">
-          <h1>
-            SMB3 Memories
-          </h1>
-
-          <h4>
-            by <a href="mailto:graham.p.heath@gmail.com" title="Send me an email">Graham P Heath</a>
-            <a href="https://github.com/loadedsith/smb3memories" title="View On GitHub">
-              <img src="images/github_white.png" alt="" height="40" width="40"/>
-            </a>
-          </h4>
-        </header>
         <div className="cards">
           {gameDisplay ||
           cards.map((row, rowIndex) => {
@@ -87,6 +75,14 @@ class MainSection extends PureComponent {
             );
           })}
         </div>
+        <footer className="footer">
+          <h4>
+            by <a href="mailto:graham.p.heath@gmail.com" title="Send me an email">Graham P Heath</a>
+            <a href="https://github.com/loadedsith/smb3memories" title="View On GitHub">
+              <img src="images/github_white.png" alt="" height="40" width="40"/>
+            </a>
+          </h4>
+        </footer>
       </section>
     );
   }

@@ -9,7 +9,7 @@ body {
   }
 }
 
-.header {
+.footer {
   h1 {
     color: $pink;
     font-size: 36px;
@@ -66,12 +66,12 @@ body {
   transition: #{$animation-timing} box-shadow, #{$animation-timing} padding;
 
   @media #{$tablet} {
-    padding: ($padding-v * $tablet-scale) ($padding-h * $tablet-scale);
+    padding: ($padding-v * $tablet-scale) ($padding-h * $tablet-scale) 3px;
   }
 
   @media #{$desktop} {
     box-shadow: inset 10px 10px 6px 10px rgba($black, .6);
-    padding: ($padding-v * $desktop-scale) ($padding-h * $desktop-scale);
+    padding: ($padding-v * $desktop-scale) ($padding-h * $desktop-scale) 3px;
   }
 }
 
